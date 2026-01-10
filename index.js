@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import ServerRoutes from "./Routes/ServerRoutes.js";
 import authRoutes from "./Routes/auth.js";
 import FirewallRoutes from "./Routes/FirewallRoutes.js";
-import LaptopRoutes from "./Routes/LaptopRoutes.js";
+import openupsRoutes from "./Routes/openupsRoutes.js";
 import SwitchRoutes from "./Routes/SwitchRoutes.js";
 import partnerRoutes from "./Routes/partnerRoutes.js";
 import cors from "cors";
@@ -37,7 +37,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/servers", ServerRoutes);
 app.use("/api/firewalls", FirewallRoutes);
-app.use("/api/laptops", LaptopRoutes);
+app.use("/api/openups", openupsRoutes);
 app.use("/api/switches", SwitchRoutes);
 app.use("/api/partners", partnerRoutes);
 

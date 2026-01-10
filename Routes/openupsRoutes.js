@@ -1,6 +1,6 @@
 import express from "express";
 import multer from "multer";
-import { Laptop } from "../schema/laptop.js";
+import { Openups } from "../schema/openups.js";
 
 const router = express.Router();
 const storage = multer.memoryStorage();
@@ -12,15 +12,15 @@ router.post("/", upload.single("image"), async (req, res) => {
     const { name, price, description } = req.body;
     const imageBuffer = req.file?.buffer;
 
-    const newLaptop = new Laptop({
+    const newOpenups = new Openups({
       name,
       price,
       description,
       image: imageBuffer,
     });
 
-    await newLaptop.save();
-    res.status(201).json({ message: "Laptop created", laptop: newLaptop });
+    await newOpenups.save();
+    res.status(201).json({ message: "Open Ups created", data: newOpenups });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
   }
@@ -29,25 +29,28 @@ router.post("/", upload.single("image"), async (req, res) => {
 // READ all
 router.get("/", async (req, res) => {
   try {
-    const laptops = await Laptop.find();
-    const formatted = laptops.map((item) => ({
+    const items = await Openups.find();
+    const formatted = items.map((item) => ({
       ...item.toObject(),
       image: item.image?.toString("base64"),
     }));
     res.json(formatted);
   } catch (error) {
-    res.status(500).json({ message: "Error fetching laptops" });
+    res.status(500).json({ message: "Error fetching data" });
   }
 });
 
 // READ single
 router.get("/:id", async (req, res) => {
   try {
-    const laptop = await Laptop.findById(req.params.id);
-    if (!laptop) return res.status(404).json({ message: "Not found" });
-    res.json({ ...laptop.toObject(), image: laptop.image?.toString("base64") });
+    const item = await Openups.findById(req.params.id);
+    if (!item) return res.status(404).json({ message: "Not found" });
+    res.json({ 
+      ...item.toObject(), 
+      image: item.image?.toString("base64") 
+    });
   } catch (error) {
-    res.status(500).json({ message: "Error fetching laptop", error: error.message });
+    res.status(500).json({ message: "Error fetching data", error: error.message });
   }
 });
 
@@ -57,14 +60,19 @@ router.put("/:id", upload.single("image"), async (req, res) => {
     const { name, price, description } = req.body;
     const image = req.file?.buffer;
 
-    const updated = await Laptop.findByIdAndUpdate(
+    const updated = await Openups.findByIdAndUpdate(
       req.params.id,
-      { name, price, description, ...(image && { image }) },
+      { 
+        name, 
+        price, 
+        description, 
+        ...(image && { image }) 
+      },
       { new: true, runValidators: true }
     );
 
     if (!updated) return res.status(404).json({ message: "Not found" });
-    res.json({ message: "Updated", laptop: updated });
+    res.json({ message: "Updated", data: updated });
   } catch (error) {
     res.status(500).json({ message: "Error updating", error: error.message });
   }
@@ -73,9 +81,9 @@ router.put("/:id", upload.single("image"), async (req, res) => {
 // DELETE
 router.delete("/:id", async (req, res) => {
   try {
-    const deleted = await Laptop.findByIdAndDelete(req.params.id);
+    const deleted = await Openups.findByIdAndDelete(req.params.id);
     if (!deleted) return res.status(404).json({ message: "Not found" });
-    res.json({ message: "Deleted", laptop: deleted });
+    res.json({ message: "Deleted", data: deleted });
   } catch (error) {
     res.status(500).json({ message: "Error deleting", error: error.message });
   }

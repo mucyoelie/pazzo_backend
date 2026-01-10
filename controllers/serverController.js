@@ -1,6 +1,6 @@
 // controllers/serverController.js
 import multer from "multer";
-import { Server } from "../schema/Server.js";
+import { Server } from "../schema/server.js";
 
 // Set up multer storage
 const storage = multer.memoryStorage();

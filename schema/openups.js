@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const laptopSchema = new mongoose.Schema({
+const openupsSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -19,4 +19,4 @@ const laptopSchema = new mongoose.Schema({
   },
 });
 
-export const Laptop = mongoose.model("Laptop", laptopSchema);
+export const Openups = mongoose.model("Openups", openupsSchema);
