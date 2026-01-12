@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import ServerRoutes from "./Routes/ServerRoutes.js";
+import ccsRoutes from "./Routes/ccsRoutes.js";
 import authRoutes from "./Routes/auth.js";
 import FirewallRoutes from "./Routes/FirewallRoutes.js";
 import openupsRoutes from "./Routes/openupsRoutes.js";
@@ -35,7 +35,7 @@ app.get("/", (req, res) => {
   res.send("Hello, Express!");
 });
 app.use("/api/auth", authRoutes);
-app.use("/api/servers", ServerRoutes);
+app.use("/api/ccs", ccsRoutes);
 app.use("/api/firewalls", FirewallRoutes);
 app.use("/api/openups", openupsRoutes);
 app.use("/api/switches", SwitchRoutes);
