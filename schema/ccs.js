@@ -1,11 +1,12 @@
-// models/Server.js
 import mongoose from "mongoose";
 
 const ccsSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  price: { type: String, required: true },
-  description: { type: String, required: true },
-  image: { type: Buffer }, // Store image as binary
+  name: String,
+  price: Number,
+  description: String,
+  image: String
 });
 
-export const Ccs = mongoose.model("Ccs", ccsSchema);
+const CCS = mongoose.model("CCS", ccsSchema);
+export default CCS;
+
