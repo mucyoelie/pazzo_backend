@@ -7,6 +7,7 @@ import FirewallRoutes from "./Routes/FirewallRoutes.js";
 import openupsRoutes from "./Routes/openupsRoutes.js";
 import SwitchRoutes from "./Routes/SwitchRoutes.js";
 import partnerRoutes from "./Routes/partnerRoutes.js";
+import adminRoute from "./Routes/admin.js"; 
 import cors from "cors";
 
 dotenv.config();
@@ -40,6 +41,7 @@ app.use("/api/firewalls", FirewallRoutes);
 app.use("/api/openups", openupsRoutes);
 app.use("/api/switches", SwitchRoutes);
 app.use("/api/partners", partnerRoutes);
+app.use("/api/admin", adminRoute);
 
 // ❌ 404 Handler for undefined routes
 app.use((req, res, next) => {
